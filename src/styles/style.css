@@ -1,0 +1,21 @@
+.body {
+    display:flex;
+    flex-direction:column;
+    width: 100vh;
+    height:100vh;
+    align-items:center;
+    justify-content:center
+}
+.gallow {
+    display:flex;
+    align-items:flex-end;
+    position:relative;
+    margin-left: 150px;
+    width:700px;
+    margin-bottom:50px;
+    justify-content:space-between
+}
+
+.gallow>img {
+    width:350px
+}
