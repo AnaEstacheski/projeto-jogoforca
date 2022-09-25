@@ -18,24 +18,24 @@ const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m
 export default function App() {
 
     const [escolhePalavra, setEscolhePalavra] = react.useState([])
-    const [palavraEscolhida, setPalavraEscolhida] = react.useState([])
+    const [palavraEscondida, setPalavraEscondida] = react.useState([])
 
     // === LOGIC ===
     function palavraAleatoria() {
         const indiceAleatorio = Math.floor(Math.random() * palavras.length)
         const palavra = palavras[indiceAleatorio].split("")
-        setEscolhePalavra(palavra)
-
-        
-
-        let palavraEscondida = []   
-        palavra.map(() => palavraEscondida.push("_ "))
-        setPalavraEscolhida(palavraEscondida)
-
-        console.log(palavraEscondida)
-       
+        setEscolhePalavra(palavra)   
+        let p = []   
+        palavra.map(() => p.push("_ "))
+        setPalavraEscondida(p)
+        console.log(p)
     }
   
+    function clicou(letra) {
+        if (escolhePalavra.includes(letra))
+
+        console.log(letra)  
+    }
 
 
     // === UI ===
@@ -44,10 +44,12 @@ export default function App() {
             <div className="gallow">
                 <img src={imagem0} alt="forca"/>
                 <button onClick={palavraAleatoria}>Escolher palavra</button>
-                <h1 className="">{palavraEscolhida}</h1>
+                <h1 className="">{palavraEscondida}</h1>
             </div>
             <div className="alphabet">
-
+                {alfabeto.map(letra => 
+                    <button key={letra} onClick={() => clicou(letra)}>{letra}</button>
+                )}
             </div>
             <div className="guess">
 

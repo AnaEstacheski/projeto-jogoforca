@@ -1,21 +1,64 @@
 .body {
-    display:flex;
-    flex-direction:column;
-    width: 100vh;
-    height:100vh;
-    align-items:center;
-    justify-content:center
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    align-items: center;
+    justify-content: center
 }
+
 .gallow {
-    display:flex;
-    align-items:flex-end;
-    position:relative;
-    margin-left: 150px;
-    width:700px;
-    margin-bottom:50px;
-    justify-content:space-between
+    display: flex;
+    align-items: flex-end;
+    position: relative;
+    width: 700px;
+    margin-bottom: 50px;
+    justify-content: space-between
 }
 
 .gallow>img {
-    width:350px
+    width: 350px;
+}
+
+.gallow>button {
+    background-color: #54af61;
+    color: #ffffff;
+    border-radius: 10px;
+    border-style: none;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    position: absolute;
+    min-width: 150px;
+    right: 0;
+    top: 25px;
+    padding: 16px 20px;
+    box-shadow: 0 4px 9px rgba(158, 153, 153, 0.471);
+    cursor: pointer;
+}
+
+.alphabet {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 550px;
+    
+   
+}
+
+.alphabet>button {
+    background-color: #9faab5;
+    border-radius: 3px;
+    border-style: none;
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    color: #7b828a;
+    font-weight: bold;
+}
+
+.alphabet>button:hover {
+    box-shadow: 0 4px 9px rgba(158, 153, 153, 0.471);
+    cursor: pointer;
 }
