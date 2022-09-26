@@ -11,7 +11,8 @@
     align-items: flex-end;
     position: relative;
     width: 700px;
-    margin-bottom: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     justify-content: space-between
 }
 
@@ -41,10 +42,8 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    height: 100px;
+    height: 80px;
     width: 550px;
-    
-   
 }
 
 .alphabet>button {
@@ -59,6 +58,41 @@
 }
 
 .alphabet>button:hover {
+    background-color:  #e1ecf4;
     box-shadow: 0 4px 9px rgba(158, 153, 153, 0.471);
+    cursor: pointer;
+}
+
+.guess {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    gap: 4vw;
+    width: 80%;
+}
+
+.guess input {
+    border-radius: 5px;
+    height: 5vh;
+    width: 30vw;
+    outline: none;
+    padding: 0 1vw;
+    box-sizing: border-box;
+    background-color: rgb(226, 226, 226);
+}
+
+.guess button {
+    font-size: 12px;
+    width: 10%;
+    height: 5vh;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    border-radius: 5px;
+    background-color: #e1ecf4;
+    color: #3f739d;
+    border-color: #3f739d;
     cursor: pointer;
 }

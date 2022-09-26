@@ -19,22 +19,74 @@ export default function App() {
 
     const [escolhePalavra, setEscolhePalavra] = react.useState([])
     const [palavraEscondida, setPalavraEscondida] = react.useState([])
+    const [letras, setLetras] = react.useState([])
+    const [erros, setErros] = react.useState(0)
+    const [forcas, setForcas] = react.useState(imagem0)
 
     // === LOGIC ===
-    function palavraAleatoria() {
-        const indiceAleatorio = Math.floor(Math.random() * palavras.length)
-        const palavra = palavras[indiceAleatorio].split("")
-        setEscolhePalavra(palavra)   
-        let p = []   
-        palavra.map(() => p.push("_ "))
-        setPalavraEscondida(p)
-        console.log(p)
-    }
-  
-    function clicou(letra) {
-        if (escolhePalavra.includes(letra))
 
-        console.log(letra)  
+    function palavraAleatoria() {
+        const indiceAleatorio = removeSpecial(palavras[Math.floor(Math.random() * palavras.length)])
+        const palavra = indiceAleatorio.split("")
+        setEscolhePalavra(palavra)
+        // let p = []
+        // palavra.map(() => p.push("_"))
+        // setPalavraEscondida(p)
+        // console.log(p)
+    }
+    
+    console.log(escolhePalavra)
+
+    function click(letra, erros) {
+        clicked(letra)
+        console.log('foi')
+        defineErro(letra)
+        console.log('foi aqui')
+        contaErros()
+        console.log('aqui de novo')
+    }
+
+    function clicked(letra) {
+        setLetras([...letras, letra])
+        
+    }
+
+    function defineErro(letra) {
+        if (escolhePalavra.includes(letra)) {
+            console.log('show')
+        } else {
+            setErros(erros + 1)
+        } 
+    }
+
+    function contaErros() {
+        if (erros === 0) {
+            setForcas(imagem0)
+        } else if (erros === 1) {
+            setForcas(imagem1)
+        } else if (erros === 2) {
+            setForcas(imagem2)
+        } else if (erros === 3) {
+            setForcas(imagem3)
+        } else if (erros === 4) {
+            setForcas(imagem4)
+        } else if (erros === 5) {
+            setForcas(imagem5)
+        } else {
+            setForcas(imagem6)
+        }
+    }
+
+
+    function removeSpecial(string) {
+        string = string.toLowerCase();
+        string = string.replace(new RegExp('[ÁÀÂÃ]', 'gi'), 'a');
+        string = string.replace(new RegExp('[ÉÈÊ]', 'gi'), 'e');
+        string = string.replace(new RegExp('[ÍÌÎ]', 'gi'), 'i');
+        string = string.replace(new RegExp('[ÓÒÔÕ]', 'gi'), 'o');
+        string = string.replace(new RegExp('[ÚÙÛ]', 'gi'), 'u');
+        string = string.replace(new RegExp('[Ç]', 'gi'), 'c');
+        return string;
     }
 
 
@@ -42,17 +94,22 @@ export default function App() {
     return (
         <div className="body">
             <div className="gallow">
-                <img src={imagem0} alt="forca"/>
+                <img src={forcas} alt="forca" />
                 <button onClick={palavraAleatoria}>Escolher palavra</button>
-                <h1 className="">{palavraEscondida}</h1>
+                {escolhePalavra.map(l =>
+                    <h1 className="">
+                        {letras.includes(l) ? l : "_"}
+                    </h1>)}
             </div>
             <div className="alphabet">
-                {alfabeto.map(letra => 
-                    <button key={letra} onClick={() => clicou(letra)}>{letra}</button>
+                {alfabeto.map((letra, index) =>
+                    <button key={letra} disabled={letras.includes(letra)} onClick={() => click(letra)}>{letra.toUpperCase()}</button>
                 )}
             </div>
             <div className="guess">
-
+                <div>Já sei a palavra!</div>
+                <input />
+                <button>Chutar</button>
             </div>
         </div>
     )
