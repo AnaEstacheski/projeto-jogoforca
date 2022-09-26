@@ -1,4 +1,4 @@
-import react from "react"
+import react, { useState } from "react"
 import imagem0 from "./assets/forca0.png"
 import imagem1 from "./assets/forca1.png"
 import imagem2 from "./assets/forca2.png"
@@ -18,10 +18,10 @@ const alfabeto = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m
 export default function App() {
 
     const [escolhePalavra, setEscolhePalavra] = react.useState([])
-    const [palavraEscondida, setPalavraEscondida] = react.useState([])
     const [letras, setLetras] = react.useState([])
     const [erros, setErros] = react.useState(0)
     const [forcas, setForcas] = react.useState(imagem0)
+    const [inputed, setInputed] = useState("")
 
     // === LOGIC ===
 
@@ -29,54 +29,35 @@ export default function App() {
         const indiceAleatorio = removeSpecial(palavras[Math.floor(Math.random() * palavras.length)])
         const palavra = indiceAleatorio.split("")
         setEscolhePalavra(palavra)
-        // let p = []
-        // palavra.map(() => p.push("_"))
-        // setPalavraEscondida(p)
-        // console.log(p)
     }
     
     console.log(escolhePalavra)
 
-    function click(letra, erros) {
+    function click(letra) {
         clicked(letra)
-        console.log('foi')
         defineErro(letra)
-        console.log('foi aqui')
-        contaErros()
-        console.log('aqui de novo')
     }
 
     function clicked(letra) {
-        setLetras([...letras, letra])
-        
+        const novasLetras = [...letras, letra]
+        setLetras(novasLetras)
     }
 
     function defineErro(letra) {
-        if (escolhePalavra.includes(letra)) {
-            console.log('show')
-        } else {
-            setErros(erros + 1)
-        } 
-    }
-
-    function contaErros() {
-        if (erros === 0) {
-            setForcas(imagem0)
-        } else if (erros === 1) {
-            setForcas(imagem1)
-        } else if (erros === 2) {
-            setForcas(imagem2)
-        } else if (erros === 3) {
-            setForcas(imagem3)
-        } else if (erros === 4) {
-            setForcas(imagem4)
-        } else if (erros === 5) {
-            setForcas(imagem5)
-        } else {
-            setForcas(imagem6)
+        if (!escolhePalavra.includes(letra)) {
+            const novoErro = erros + 1
+            setErros(novoErro)
+            setForcas(images[novoErro])
         }
     }
 
+    function chutar(e) {
+        e.preventDefault();
+        if (inputed )
+        console.log(inputed)
+        recebeInputed()
+        // setNewInputed("")
+    }
 
     function removeSpecial(string) {
         string = string.toLowerCase();
@@ -89,27 +70,32 @@ export default function App() {
         return string;
     }
 
-
     // === UI ===
+    
     return (
         <div className="body">
             <div className="gallow">
                 <img src={forcas} alt="forca" />
                 <button onClick={palavraAleatoria}>Escolher palavra</button>
                 {escolhePalavra.map(l =>
-                    <h1 className="">
-                        {letras.includes(l) ? l : "_"}
+                    <h1 className={erros < 6 ? "" : "errado"}>
+                        {letras.includes(l) || erros === 6 ? l : "_"}
                     </h1>)}
             </div>
             <div className="alphabet">
-                {alfabeto.map((letra, index) =>
-                    <button key={letra} disabled={letras.includes(letra)} onClick={() => click(letra)}>{letra.toUpperCase()}</button>
+                {alfabeto.map((letra) =>
+                    <button key={letra} disabled={letras.includes(letra) || erros === 6} onClick={() => click(letra)}>{letra.toUpperCase()}</button>
                 )}
             </div>
             <div className="guess">
                 <div>Já sei a palavra!</div>
-                <input />
-                <button>Chutar</button>
+                <input 
+                type="text"
+                placeholder=""
+                value={inputed}
+                onChange={(e) => setInputed(e.target.value)}
+                disabled={erros === 6}/>
+                <button onClick={chutar}>Chutar</button>
             </div>
         </div>
     )

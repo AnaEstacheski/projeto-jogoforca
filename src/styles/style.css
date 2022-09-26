@@ -96,3 +96,7 @@
     border-color: #3f739d;
     cursor: pointer;
 }
+
+.errado {
+    color: red;
+}
